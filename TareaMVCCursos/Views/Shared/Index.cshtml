@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CursoViewDto>;
+@{
+    ViewData["Title"] = "Home";
+}
+
+<br />
+<h1 class="alert-heading align-content-lg-center">Cursos Tecnicos.</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+                 <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="@item.ImageUrl" style="width:100%; height:auto;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.NombreCurso</h5>
+                        <p class="card-text">@item.Descripcion</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Fecha de Inicio: @item.FechaInicio</li>
+                        <li class="list-group-item bg-success">Cupo del Curso: @item.CupoCurso</li>
+                        <li class="list-group-item bg-success">Inscritos: @item.Inscritos</li>
+                    </ul>
+                    <div class="card-body">
+                    @if (item.CupoCurso == item.Inscritos)
+                    {
+                        <button class="btn btn-outline-primary" disabled>Inscribirme</button>
+                    } 
+                    @if(item.Inscritos < item.CupoCurso)
+                    {
+                        <a href="@Url.Action("Registros","Home", new{publicacionId = item.IdCurso})"
+class="btn btn-outline-primary">Inscribirme</a>
+                    }
+
+                    <a href="#" class="card-link">Más información</a>
+                    </div>
+                </div>
+            </div>
+    }
+</div>
